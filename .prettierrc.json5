@@ -4,7 +4,7 @@
     {
       files: "*.test.js",
       options: {
-        semi: true,
+        semi: false,
       },
     },
     {
