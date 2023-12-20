@@ -21,7 +21,7 @@ const list = [
   },
 ]
 
-function App() {
+const App = () => {
   return (
     <div className='App'>
       <h1>My Hacker Stories</h1>
@@ -35,7 +35,7 @@ function App() {
   )
 }
 
-function Search() {
+const Search = () => {
   return (
     <div>
       <label htmlFor='search'>Search: </label>
@@ -44,10 +44,10 @@ function Search() {
   )
 }
 
-function List() {
+const List = () => {
   return (
     <ul>
-      {list.map(function (item) {
+      {list.map((item) => {
         return (
           <li key={item.objectID}>
             <span>
@@ -61,17 +61,6 @@ function List() {
       })}
     </ul>
   )
-}
-
-class Person {
-  constructor(firstName, lastName) {
-    this.firstName = firstName
-    this.lastName = lastName
-  }
-
-  getName() {
-    return this.firstName + ' ' + this.lastName
-  }
 }
 
 export default App
