@@ -32,12 +32,15 @@ function App() {
       <hr />
 
       <ul>
-        {list.map(function (item, index) {
+        {list.map(function (item) {
           return (
-            <li key={index}>
-              {/* only use an index as a last resort */}
-              {/* and by the way: that's how you do comments in JSX */}
-              {item.title}
+            <li key={item.objectID}>
+              <span>
+                <a href={item.url}>{item.title}</a>
+              </span>
+              <span>{item.author}</span>
+              <span>{item.num_comments}</span>
+              <span>{item.points}</span>
             </li>
           )
         })}
