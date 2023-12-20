@@ -32,8 +32,14 @@ function App() {
       <hr />
 
       <ul>
-        {list.map(function (item) {
-          return <li key={item.objectID}>{item.title}</li>
+        {list.map(function (item, index) {
+          return (
+            <li key={index}>
+              {/* only use an index as a last resort */}
+              {/* and by the way: that's how you do comments in JSX */}
+              {item.title}
+            </li>
+          )
         })}
       </ul>
     </div>
