@@ -144,6 +144,7 @@ const App = () => {
 
   React.useEffect(() => {
     setIsLoading(true)
+
     getAsyncStories()
       .then((result) => {
         setStories(result.data.stories)
@@ -152,9 +153,9 @@ const App = () => {
       .catch(() => setIsError(true))
   }, [])
 
-  // if (isLoading) {
-  //   return <p>Loading ...</p>
-  // }
+  if (isLoading) {
+    return <p>Loading ...</p>
+  }
 
   return (
     <div>
