@@ -125,9 +125,9 @@ const List = ({ list, onRemoveItem }) => (
 )
 
 const App = () => {
+  const [stories, setStories] = React.useState(initialStories)
   const [isLoading, setIsLoading] = React.useState(false)
   const [isError, setIsError] = React.useState(false)
-  const [stories, setStories] = React.useState(initialStories)
   const [searchTerm, setSearchTerm] = useStorageState( 'search', 'React' )
   const handleSearch = (event) => { setSearchTerm(event.target.value) }
 
@@ -172,22 +172,18 @@ const App = () => {
 
       <hr />
 
-      <List
-        list={searchedStories}
-        onRemoveItem={handleRemoveStory}
-      />
-
-      {/* {isError && <p>Something went wrong ...</p>}
+      {isError && <p>Something went wrong ...</p>}
 
       {
         isLoading ? (
           <p>Loading ...</p>
         ) : (
-
-
-
+          <List
+            list={searchedStories}
+            onRemoveItem={handleRemoveStory}
+          />
         )
-      } */}
+      }
     </div>
   )
 }
