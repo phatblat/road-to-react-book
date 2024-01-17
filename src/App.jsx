@@ -67,7 +67,7 @@ const InputWithLabel = ({
   React.useEffect(() => {
     if (isFocused && inputRef.current) {
       // D
-      inputRef.current.focus();
+      inputRef.current.focus()
     }
   }, [isFocused])
 
@@ -127,15 +127,17 @@ const List = ({ list, onRemoveItem }) => (
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [isError, setIsError] = React.useState(false)
+  const [stories, setStories] = React.useState(initialStories)
   const [searchTerm, setSearchTerm] = useStorageState( 'search', 'React' )
   const handleSearch = (event) => { setSearchTerm(event.target.value) }
-  const [stories, setStories] = React.useState(initialStories)
+
   const handleRemoveStory = (item) => {
     const newStories = stories.filter(
       (story) => item.objectID !== story.objectID
     )
     setStories(newStories)
   }
+
   const searchedStories = stories.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
@@ -158,6 +160,15 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
+      <InputWithLabel
+        id="search"
+        value={searchTerm}
+        isFocused
+        onInputChange={handleSearch}
+      >
+        <strong>Search:</strong>
+      </InputWithLabel>
+
       <hr />
 
       <List
@@ -171,14 +182,7 @@ const App = () => {
         isLoading ? (
           <p>Loading ...</p>
         ) : (
-            // <InputWithLabel
-            //   id="search"
-            //   value={searchTerm}
-            //   isFocused
-            //   onInputChange={handleSearch}
-            // >
-            //   <strong>Search:</strong>
-            // </InputWithLabel>
+
 
 
         )
@@ -186,17 +190,5 @@ const App = () => {
     </div>
   )
 }
-
-// (
-//   <div className='App'>
-//     <h1>My Hacker Stories</h1>
-
-//     <Search />
-
-//     <hr />
-
-//     <List />
-//   </div>
-// )
 
 export default App
