@@ -29,6 +29,14 @@ const getAsyncStories = () =>
     )
   )
 
+const storiesReducer = (state, action) => {
+  if (action.type === 'SET_STORIES') {
+    return action.payload
+  } else {
+    throw new Error()
+  }
+}
+
 const useStorageState = (key, initialState) => {
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
@@ -125,7 +133,8 @@ const List = ({ list, onRemoveItem }) => (
 )
 
 const App = () => {
-  const [stories, setStories] = React.useState(initialStories)
+  // const [stories, setStories] = React.useState(initialStories)
+  const [stories, dispatchStories] = React.useReducer( storiesReducer, [] )
   const [isLoading, setIsLoading] = React.useState(false)
   const [isError, setIsError] = React.useState(false)
   const [searchTerm, setSearchTerm] = useStorageState( 'search', 'React' )
@@ -135,7 +144,10 @@ const App = () => {
     const newStories = stories.filter(
       (story) => item.objectID !== story.objectID
     )
-    setStories(newStories)
+    dispatchStories({
+      type: 'SET_STORIES',
+      payload: newStories,
+    })
   }
 
   const searchedStories = stories.filter((story) =>
@@ -147,7 +159,10 @@ const App = () => {
 
     getAsyncStories()
       .then((result) => {
-        setStories(result.data.stories)
+        dispatchStories({
+          type: 'SET_STORIES',
+          payload: result.data.stories,
+        })
         setIsLoading(false)
       })
       .catch(() => setIsError(true))
